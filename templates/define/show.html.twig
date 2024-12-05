@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Define{% endblock %}
+
+{% block body %}
+    <h1>Define</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ define.id }}</td>
+            </tr>
+            <tr>
+                <th>CapaMax</th>
+                <td>{{ define.capaMax }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ define.prix }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_define_index') }}">back to list</a>
+
+    <a href="{{ path('app_define_edit', {'id': define.id}) }}">edit</a>
+
+    {{ include('define/_delete_form.html.twig') }}
+{% endblock %}
