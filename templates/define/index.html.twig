@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Define index{% endblock %}
+
+{% block body %}
+    <h1>Define index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CapaMax</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for define in defines %}
+            <tr>
+                <td>{{ define.id }}</td>
+                <td>{{ define.capaMax }}</td>
+                <td>{{ define.prix }}</td>
+                <td>
+                    <a href="{{ path('app_define_show', {'id': define.id}) }}">show</a>
+                    <a href="{{ path('app_define_edit', {'id': define.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_define_new') }}">Create new</a>
+{% endblock %}
