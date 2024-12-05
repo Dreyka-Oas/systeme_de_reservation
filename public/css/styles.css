@@ -162,6 +162,7 @@ button:hover {
     font-size: 0.9rem;
     margin-top: 1rem;
     transition: color 0.3s ease;
+    position: relative; /* Ajout de positionnement relatif pour que z-index fonctionne */
 }
 
 .register-link:hover {

@@ -34,17 +34,17 @@
         </div>
 
         <div class="input-group">
-            {{ form_label(registrationForm.agreeTerms) }}
+            {{ form_label(registrationForm.agreeTerms, 'Conditions') }}
             {{ form_widget(registrationForm.agreeTerms) }}
         </div>
 
         <div class="input-group">
-            {{ form_label(registrationForm.name) }}
+            {{ form_label(registrationForm.name, 'Prénom') }}
             {{ form_widget(registrationForm.name, { 'attr': {'placeholder': 'Prénom'} }) }}
         </div>
 
         <div class="input-group">
-            {{ form_label(registrationForm.lastName) }}
+            {{ form_label(registrationForm.lastName, 'Nom de famille') }}
             {{ form_widget(registrationForm.lastName, { 'attr': {'placeholder': 'Nom de famille'} }) }}
         </div>
 

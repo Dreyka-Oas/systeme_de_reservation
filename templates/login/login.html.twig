@@ -13,36 +13,37 @@
         <div class="circle"></div>
     </div>
 
-    <!-- Formulaire de connexion -->
-    <form class="login-form" method="post">
-        <h1>Connexion</h1>
+    {% if app.user %}
+        <!-- Message pour l'utilisateur déjà connecté -->
+        <div class="mb-3">
+            Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}" class="register-link">Se déconnecter</a>
+        </div>
+    {% else %}
+        <!-- Formulaire de connexion -->
+        <form class="login-form" method="post">
+            <h1>Connexion</h1>
 
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
 
-        {% if app.user %}
-            <div class="mb-3">
-                Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}" class="register-link">Se déconnecter</a>
+            <div class="input-group">
+                <label for="email">Adresse email</label>
+                <input type="email" value="{{ last_username }}" name="_username" id="email" placeholder="exemple@email.com" required autofocus>
             </div>
-        {% endif %}
 
-        <div class="input-group">
-            <label for="email">Adresse email</label>
-            <input type="email" value="{{ last_username }}" name="_username" id="email" placeholder="exemple@email.com" required autofocus>
-        </div>
+            <div class="input-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" name="_password" id="password" placeholder="••••••••" required>
+            </div>
 
-        <div class="input-group">
-            <label for="password">Mot de passe</label>
-            <input type="password" name="_password" id="password" placeholder="••••••••" required>
-        </div>
+            <div class="form-group">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            </div>
 
-        <div class="form-group">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        </div>
+            <button type="submit">Se connecter</button>
 
-        <button type="submit">Se connecter</button>
-
-        <a href="{{ path('app_register') }}" class="register-link">Vous n'avez pas de compte ? S'inscrire</a>
-    </form>
+            <a href="{{ path('app_register') }}" class="register-link">Vous n'avez pas de compte ? S'inscrire</a>
+        </form>
+    {% endif %}
 {% endblock %}
