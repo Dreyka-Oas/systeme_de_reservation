@@ -1,31 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block body %}
-    <form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <!-- Lien vers le fichier CSS -->
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+    <!-- Fond animé -->
+    <div class="background-animation">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <!-- Formulaire de connexion -->
+    <form class="login-form" method="post">
+        <h1>Connexion</h1>
+
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        {% if app.user %}
+            <div class="mb-3">
+                Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}" class="register-link">Se déconnecter</a>
+            </div>
+        {% endif %}
+
+        <div class="input-group">
+            <label for="email">Adresse email</label>
+            <input type="email" value="{{ last_username }}" name="_username" id="email" placeholder="exemple@email.com" required autofocus>
         </div>
-    {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="username">Email</label>
-    <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
-    <label for="password">Password</label>
-    <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+        <div class="input-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" name="_password" id="password" placeholder="••••••••" required>
+        </div>
 
-    <!-- Décommente la ligne suivante pour ajouter le token CSRF -->
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <div class="form-group">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        </div>
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+        <button type="submit">Se connecter</button>
 
+        <a href="{{ path('app_register') }}" class="register-link">Vous n'avez pas de compte ? S'inscrire</a>
+    </form>
 {% endblock %}
