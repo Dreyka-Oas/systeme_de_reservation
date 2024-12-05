@@ -7,10 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface; 
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface; // Utilisation de PasswordHasherInterface
 
-#[ORM\InheritanceType("SINGLE_TABLE")] // Cette stratégie met tous les utilisateurs dans une seule table
-#[ORM\DiscriminatorColumn(name: 'user_type', type: 'string')] // Colonne discriminante pour différencier les types d'utilisateur
+#[ORM\InheritanceType("SINGLE_TABLE")] 
+#[ORM\DiscriminatorColumn(name: 'user_type', type: 'string')] 
 #[ORM\DiscriminatorMap(["user" => "User", "coach" => "Coach", "member" => "Member", "admin" => "Admin"])]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -30,7 +29,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    private ?string $password = null; // Remettre la propriété password correctement
+    private ?string $password = null;
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
@@ -44,13 +43,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "boolean")]
     private bool $agreeTerms = false;
 
-    private UserPasswordHasherInterface $passwordHasher; // Déclaration de l'interface du hasher
+    private ?string $plainPassword = null;  // Ajout du champ plainPassword (mot de passe en clair)
 
-    // Injection du password hasher via le constructeur
-    public function __construct(UserPasswordHasherInterface $passwordHasher)
-    {
-        $this->passwordHasher = $passwordHasher;
-    }
+    // Les autres méthodes de getter et setter pour les autres propriétés...
 
     public function getAgreeTerms(): bool
     {
@@ -79,29 +74,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     */
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $plainPassword): static
+    {
+        $this->plainPassword = $plainPassword;
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->password = $password;
+        return $this;
+    }
+
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
 
-    public function getPassword(): ?string
-    {
-        return $this->password; // Renvoie la propriété password correctement
-    }
-
-    public function setPassword(string $password): static
-    {
-        // Hachage du mot de passe avant de le stocker
-        $this->password = $this->passwordHasher->hashPassword($this, $password);
-        return $this;
-    }
-
     public function eraseCredentials(): void
     {
-        // Si vous stockez des données temporaires, sensibles pour l'utilisateur, nettoyez-les ici
+        // Ne rien faire ici si tu ne stockes pas de données sensibles temporaires
     }
 
     public function getName(): ?string
@@ -126,21 +128,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return list<string> 
-     */
     public function getRoles(): array
     {
         $roles = $this->roles;
         if (empty($roles)) {
-            $roles[] = 'ROLE_USER';  // Ajoutez un rôle par défaut ici
+            $roles[] = 'ROLE_USER';
         }
         return array_unique($roles);
     }
 
-    /**
-     * @param list<string> $roles
-     */
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
