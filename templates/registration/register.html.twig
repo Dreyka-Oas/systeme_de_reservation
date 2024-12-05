@@ -17,9 +17,12 @@
     <form class="login-form" method="post">
         <h1>Inscription</h1>
 
+        <!-- Affichage des erreurs du formulaire -->
         {{ form_errors(registrationForm) }}
 
         <!-- Formulaire avec champs d'inscription -->
+        {{ form_start(registrationForm) }}  <!-- Assurez-vous que form_start inclut le token CSRF -->
+
         <div class="input-group">
             {{ form_label(registrationForm.email) }}
             {{ form_widget(registrationForm.email, { 'attr': {'placeholder': 'exemple@email.com'} }) }}
@@ -48,5 +51,7 @@
         <button type="submit">S'inscrire</button>
 
         <a href="{{ path('app_login') }}" class="register-link">Vous avez déjà un compte ? Se connecter</a>
+
+        {{ form_end(registrationForm) }}  <!-- Cela termine le formulaire et ajoute le token CSRF automatiquement -->
     </form>
 {% endblock %}
