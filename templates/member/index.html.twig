@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Member index{% endblock %}
+
+{% block body %}
+    <h1>Member index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Name</th>
+                <th>LastName</th>
+                <th>Roles</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for member in members %}
+            <tr>
+                <td>{{ member.id }}</td>
+                <td>{{ member.email }}</td>
+                <td>{{ member.password }}</td>
+                <td>{{ member.name }}</td>
+                <td>{{ member.lastName }}</td>
+                <td>{{ member.roles ? member.roles|json_encode : '' }}</td>
+                <td>
+                    <a href="{{ path('app_member_show', {'id': member.id}) }}">show</a>
+                    <a href="{{ path('app_member_edit', {'id': member.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_member_new') }}">Create new</a>
+{% endblock %}
