@@ -1,4 +1,4 @@
-/* Réinitialisation générale */
+/* Général - Réinitialisation de marges et paddings */
 * {
     margin: 0;
     padding: 0;
@@ -6,154 +6,196 @@
     font-family: 'Inter', sans-serif;
 }
 
-/* Corps de la page */
+/* Fond sombre et centrage du contenu principal */
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     background: #0a192f; /* Couleur de fond sombre */
-    color: #fff;
+    overflow-x: hidden;
 }
 
-/* Conteneur principal */
+/* Contenu principal sous la barre de navigation */
 .main-content {
-    width: 85%;
-    max-width: 1200px;
-    margin: 2rem auto;
-    background-color: #1e293b; /* Fond sombre */
+    margin-top: 80px; /* Décalage pour éviter que le contenu soit masqué par la nav */
     padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre légère pour ajouter de la profondeur */
+    color: #fff;
+    max-width: 1200px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Animation fade-in pour le contenu */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Titre principal */
 h1 {
+    color: #fff;
     font-size: 2rem;
-    color: #fff; /* Texte blanc pour un bon contraste */
+    text-align: center;
     margin-bottom: 2rem;
-    border-bottom: 2px solid #3b82f6; /* Légère ligne bleue sous le titre */
-    padding-bottom: 10px;
 }
 
 /* Formulaire de modification du profil */
 .profile-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    width: 100%;
+    max-width: 450px;
+    padding: 2rem;
+    background-color: rgba(30, 41, 59, 0.9); /* Fond foncé semi-transparent */
+    border-radius: 12px;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.6);
+    margin: 0 auto;
+    animation: fadeIn 0.6s ease-out;
 }
 
-.input-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.input-group label {
-    font-size: 1rem;
+.profile-form label {
+    display: block;
+    color: #94a3b8;
     margin-bottom: 0.5rem;
-    color: #94a3b8; /* Gris clair pour les labels */
+    font-size: 0.9rem;
 }
 
-.input-group input {
-    padding: 0.8rem;
+.profile-form input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #66666627;
+    background: rgba(30, 41, 59, 0.7);
+    border-radius: 8px;
+    color: #fff;
     font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background-color: #f9f9f9; /* Fond clair pour les champs de saisie */
-    transition: border-color 0.3s ease-in-out; /* Transition douce sur le focus */
+    transition: all 0.3s ease;
 }
 
-.input-group input:focus {
-    border-color: #3b82f6; /* Bordure bleue lors du focus */
+.profile-form input:focus {
     outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-button[type="submit"] {
-    grid-column: span 2; /* Le bouton prend toute la largeur */
-    padding: 1rem;
-    background-color: #3b82f6; /* Couleur de fond bleu */
-    color: white;
-    font-size: 1.1rem;
+.profile-form button {
+    width: 100%;
+    padding: 0.75rem;
+    background: #3b82f6;
+    color: #fff;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out; /* Changement de couleur au survol */
+    transition: all 0.3s ease;
+    margin-top: 1rem;
 }
 
-button[type="submit"]:hover {
-    background-color: #2563eb; /* Changement de couleur en bleu foncé au survol */
+.profile-form button:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
 }
 
-/* Section historique des réservations */
+.profile-form button:active {
+    transform: translateY(0);
+}
+
+/* Section Historique des réservations */
 .reservation-history {
-    margin-top: 3rem;
+    margin-top: 2rem;
 }
 
 .history-nav {
     display: flex;
-    gap: 1rem;
+    justify-content: space-between;
     margin-bottom: 1rem;
 }
 
 .history-nav button {
-    padding: 1rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background-color: #f1f1f1;
+    background: rgba(30, 41, 59, 0.7);
+    color: #fff;
+    border: 2px solid #66666627;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.history-nav button.active {
-    background-color: #3b82f6; /* Couleur bleue pour le bouton actif */
-    color: white;
+    transition: all 0.3s ease;
 }
 
 .history-nav button:hover {
-    background-color: #2563eb; /* Légère teinte plus sombre au survol */
+    background: #3b82f6;
+    transform: translateY(-2px);
+}
+
+.history-nav button.active {
+    background: #3b82f6;
+    transform: translateY(-2px);
 }
 
 .history-section {
-    display: none; /* Les sections sont cachées par défaut */
+    display: none;
 }
 
 .history-section.active {
-    display: block; /* Afficher la section active */
+    display: block;
 }
 
-/* Réservation individuelle */
-.reservation-item {
+/* Barre de navigation */
+.navbar {
     display: flex;
     justify-content: space-between;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    background-color: #1e293b; /* Fond sombre pour chaque élément de réservation */
+    align-items: center;
+    background: rgba(30, 41, 59, 0.9); /* Fond semi-transparent */
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
-.reservation-info h3 {
-    font-size: 1.1rem;
-    color: #fff;
-    margin: 0;
-}
-
-.reservation-info p {
-    font-size: 0.9rem;
-    color: #94a3b8;
-}
-
-.status-upcoming, .status-completed {
+.nav-logo {
+    font-size: 1.5rem;
+    color: #3b82f6; /* Couleur du logo */
+    text-decoration: none;
     font-weight: bold;
-    padding: 0.4rem 1rem;
-    border-radius: 6px;
-    color: white;
 }
 
-.status-upcoming {
-    background-color: #3b82f6; /* À venir */
+.nav-right .btn {
+    padding: 0.5rem 1rem;
+    margin-left: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: #fff;
+    transition: background 0.3s ease;
 }
 
-.status-completed {
-    background-color: #28a745; /* Terminé */
+.nav-right .btn-login {
+    background: #3b82f6;
+}
+
+.nav-right .btn-login:hover {
+    background: #2563eb;
+}
+
+.nav-right .btn-register {
+    background: #1e293b;
+    border: 1px solid #3b82f6;
+}
+
+.nav-right .btn-register:hover {
+    background: #3b82f6;
+}
+
+.nav-right .btn-logout {
+    background: #ef4444; /* Rouge pour déconnexion */
+}
+
+.nav-right .btn-logout:hover {
+    background: #dc2626;
 }
