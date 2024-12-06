@@ -1,0 +1,159 @@
+/* Réinitialisation générale */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Corps de la page */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #0a192f; /* Couleur de fond sombre */
+    color: #fff;
+}
+
+/* Conteneur principal */
+.main-content {
+    width: 85%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    background-color: #1e293b; /* Fond sombre */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre légère pour ajouter de la profondeur */
+}
+
+/* Titre principal */
+h1 {
+    font-size: 2rem;
+    color: #fff; /* Texte blanc pour un bon contraste */
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #3b82f6; /* Légère ligne bleue sous le titre */
+    padding-bottom: 10px;
+}
+
+/* Formulaire de modification du profil */
+.profile-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #94a3b8; /* Gris clair pour les labels */
+}
+
+.input-group input {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9; /* Fond clair pour les champs de saisie */
+    transition: border-color 0.3s ease-in-out; /* Transition douce sur le focus */
+}
+
+.input-group input:focus {
+    border-color: #3b82f6; /* Bordure bleue lors du focus */
+    outline: none;
+}
+
+button[type="submit"] {
+    grid-column: span 2; /* Le bouton prend toute la largeur */
+    padding: 1rem;
+    background-color: #3b82f6; /* Couleur de fond bleu */
+    color: white;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out; /* Changement de couleur au survol */
+}
+
+button[type="submit"]:hover {
+    background-color: #2563eb; /* Changement de couleur en bleu foncé au survol */
+}
+
+/* Section historique des réservations */
+.reservation-history {
+    margin-top: 3rem;
+}
+
+.history-nav {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.history-nav button {
+    padding: 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f1f1f1;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.history-nav button.active {
+    background-color: #3b82f6; /* Couleur bleue pour le bouton actif */
+    color: white;
+}
+
+.history-nav button:hover {
+    background-color: #2563eb; /* Légère teinte plus sombre au survol */
+}
+
+.history-section {
+    display: none; /* Les sections sont cachées par défaut */
+}
+
+.history-section.active {
+    display: block; /* Afficher la section active */
+}
+
+/* Réservation individuelle */
+.reservation-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #1e293b; /* Fond sombre pour chaque élément de réservation */
+}
+
+.reservation-info h3 {
+    font-size: 1.1rem;
+    color: #fff;
+    margin: 0;
+}
+
+.reservation-info p {
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+
+.status-upcoming, .status-completed {
+    font-weight: bold;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    color: white;
+}
+
+.status-upcoming {
+    background-color: #3b82f6; /* À venir */
+}
+
+.status-completed {
+    background-color: #28a745; /* Terminé */
+}

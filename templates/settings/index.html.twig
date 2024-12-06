@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paramètres - Mon Application</title>
+    <link rel="stylesheet" href="{{ asset('css/settings.css') }}">
+</head>
+<body>
+
+    <!-- Inclusion de la barre de navigation -->
+    {% include 'home/navbar.html.twig' %}
+
+    <!-- Contenu principal de la page -->
+    <div class="main-content">
+        <h1>Paramètres du Compte</h1>
+
+        <!-- Formulaire de modification du profil -->
+        <form method="post" action="{{ path('app_settings') }}" class="profile-form">
+            {{ form_start(form) }}
+                {{ form_row(form.name) }}
+                {{ form_row(form.lastname) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.password) }}
+                <button type="submit" class="btn-submit">Sauvegarder</button>
+            {{ form_end(form) }}
+        </form>
+
+
+        <!-- Historique des réservations -->
+        <section class="reservation-history">
+            <h2>Historique des Réservations</h2>
+
+            <!-- Liste des réservations à venir -->
+            <div class="history-nav">
+                <button class="active" data-target="upcoming">Prochaines réservations</button>
+                <button data-target="past">Historique complet</button>
+            </div>
+
+            <div class="history-section active" id="upcoming">
+                {# {% for reservation in upcoming_reservations %}
+                    <div class="reservation-item">
+                        <div class="reservation-info">
+                            <h3>{{ reservation.title }}</h3>
+                            <p>{{ reservation.date }} - {{ reservation.time }}</p>
+                        </div>
+                        <span class="status-upcoming">À venir</span>
+                    </div>
+                {% endfor %} #}
+            </div>
+
+            <div class="history-section" id="past">
+                {# {% for reservation in past_reservations %}
+                    <div class="reservation-item">
+                        <div class="reservation-info">
+                            <h3>{{ reservation.title }}</h3>
+                            <p>{{ reservation.date }} - {{ reservation.time }}</p>
+                        </div>
+                        <span class="status-completed">Terminé</span>
+                    </div>
+                {% endfor %} #}
+            </div>
+        </section>
+    </div>
+
+    <script src="{{ asset('js/scripts.js') }}"></script>
+</body>
+</html>

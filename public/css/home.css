@@ -1,0 +1,223 @@
+/* Réinitialisation générale */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Corps de la page */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #0a192f; /* Couleur de fond sombre */
+    color: #fff;
+}
+
+/* Barre de navigation */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(30, 41, 59, 0.9); /* Fond semi-transparent */
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    color: #3b82f6; /* Couleur du logo */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-right .btn {
+    padding: 0.5rem 1rem;
+    margin-left: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: #fff;
+    transition: background 0.3s ease;
+}
+
+.nav-right .btn-login {
+    background: #3b82f6;
+}
+
+.nav-right .btn-login:hover {
+    background: #2563eb;
+}
+
+.nav-right .btn-register {
+    background: #1e293b;
+    border: 1px solid #3b82f6;
+}
+
+.nav-right .btn-register:hover {
+    background: #3b82f6;
+}
+
+.nav-right .btn-logout {
+    background: #ef4444; /* Rouge pour déconnexion */
+}
+
+.nav-right .btn-logout:hover {
+    background: #dc2626;
+}
+
+/* Contenu principal */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+}
+
+main h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+main p {
+    font-size: 1.2rem;
+    color: #94a3b8; /* Gris clair */
+    margin-bottom: 2rem;
+}
+
+/* Table des activités */
+.activities {
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 800px;
+}
+
+.activities h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.activities-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(30, 41, 59, 0.9); /* Fond semi-transparent */
+    color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.activities-table th, 
+.activities-table td {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.activities-table th {
+    background: #1e293b;
+    color: #3b82f6;
+    font-weight: bold;
+}
+
+.activities-table td {
+    color: #94a3b8;
+}
+
+.activities-table tr:hover {
+    background: rgba(59, 130, 246, 0.1); /* Survol */
+}
+
+/* Lien vers les pages */
+a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #2563eb;
+}
+
+/* Footer (si nécessaire plus tard) */
+footer {
+    background: #1e293b;
+    color: #94a3b8;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+}
+
+/* home.css */
+
+/* Bouton de paramètres (settings) */
+.btn-settings {
+    width: 40px;
+    height: 40px;
+    background-image: url('https://cdn-icons-png.flaticon.com/512/416/416204.png'); /* Remplacez par le chemin de votre image */
+    background-size: cover; /* Pour ajuster l'image à la taille du bouton */
+    background-position: center;
+    border: none;
+    border-radius: 50%; /* Pour un bouton circulaire */
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Effet au survol du bouton */
+.btn-settings:hover {
+    transform: scale(1.1); /* Agrandit légèrement le bouton */
+    opacity: 0.8;
+}
+
+.BoutonInscrire {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    background-color: #3b82f6; /* Couleur bleue principale */
+    color: #ffffff; /* Texte blanc */
+    padding: 0.5rem 1.5rem; /* px-6 et py-2 */
+    border-radius: 0.5rem; /* Bords arrondis */
+    border: solid 1px #2563eb; /* Couleur et style de la bordure */
+    border-bottom-width: 4px; /* Épaisseur par défaut de la bordure inférieure */
+}
+
+.BoutonInscrire:hover {
+    filter: brightness(1.1); /* Éclaircir le bouton au survol */
+    transform: translateY(-1px); /* Légère élévation au survol */
+    border-bottom-width: 6px; /* Bordure plus épaisse au survol */
+}
+
+.BoutonInscrire:active {
+    border-bottom-width: 2px; /* Bordure plus fine lors de l'activation (clic) */
+    filter: brightness(0.9); /* Assombrir légèrement lors du clic */
+    transform: translateY(2px); /* Légère descente lors du clic */
+}
+
+.styled-header {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.styled-header:hover {
+    background-color: #3b82f6;
+    transform: translateY(-2px);
+}
+
+.styled-header:active {
+    background-color: #1d4ed8;
+    transform: translateY(1px);
+}

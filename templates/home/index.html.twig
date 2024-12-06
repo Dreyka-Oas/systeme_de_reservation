@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <!-- Lien vers le fichier CSS -->
+    <link href="{{ asset('css/home.css') }}" rel="stylesheet">
+
+    <header>
+        <!-- Inclure la barre de navigation -->
+        {% include 'home/navbar.html.twig' %}
+    </header>
+
+    <!-- Contenu principal -->
+    <main>
+        {% if not app.user %}
+            <h1>Bienvenue sur notre site !</h1>
+            <p>Ceci est une page d'accueil simple. Explorez nos fonctionnalités en vous connectant ou en créant un compte.</p>
+        {% endif %}
+        </br>
+         {% if is_granted('ROLE_MEMBER') %}
+            {% include 'home/member_home.html.twig' %}
+        {% endif %}
+    </main>
+{% endblock %}
