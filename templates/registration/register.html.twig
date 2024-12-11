@@ -1,21 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <!-- Lien vers le fichier CSS -->
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 
-    {{ form_errors(registrationForm) }}
+    <!-- Fond animé -->
+    <div class="background-animation">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
 
-    {{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-        {{ form_row(registrationForm.name) }}
-        {{ form_row(registrationForm.lastName) }}
+    <!-- Formulaire d'inscription -->
+    <form class="login-form" method="post">
+        <h1>Inscription</h1>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+        <!-- Affichage des erreurs du formulaire -->
+        {{ form_errors(registrationForm) }}
+
+        <!-- Formulaire avec champs d'inscription -->
+        {{ form_start(registrationForm) }}  <!-- Assurez-vous que form_start inclut le token CSRF -->
+
+        <div class="input-group">
+            {{ form_label(registrationForm.email) }}
+            {{ form_widget(registrationForm.email, { 'attr': {'placeholder': 'exemple@email.com'} }) }}
+        </div>
+
+        <div class="input-group">
+            {{ form_label(registrationForm.plainPassword, 'Mot de passe') }}
+            {{ form_widget(registrationForm.plainPassword, { 'attr': {'placeholder': '••••••••'} }) }}
+        </div>
+
+        <div class="input-group">
+            {{ form_label(registrationForm.agreeTerms, 'Conditions') }}
+            {{ form_widget(registrationForm.agreeTerms) }}
+        </div>
+
+        <div class="input-group">
+            {{ form_label(registrationForm.name, 'Prénom') }}
+            {{ form_widget(registrationForm.name, { 'attr': {'placeholder': 'Prénom'} }) }}
+        </div>
+
+        <div class="input-group">
+            {{ form_label(registrationForm.lastName, 'Nom de famille') }}
+            {{ form_widget(registrationForm.lastName, { 'attr': {'placeholder': 'Nom de famille'} }) }}
+        </div>
+
+        <button type="submit">S'inscrire</button>
+
+        <a href="{{ path('app_login') }}" class="register-link">Vous avez déjà un compte ? Se connecter</a>
+
+        {{ form_end(registrationForm) }}  <!-- Cela termine le formulaire et ajoute le token CSRF automatiquement -->
+    </form>
 {% endblock %}

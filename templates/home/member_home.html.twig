@@ -1,0 +1,135 @@
+<section class="user-home">
+    <h2>Bienvenue {{ app.user.name }}</h2>
+    <p>Voici les activités disponibles pour vous :</p>
+    </br></br>
+
+    <section class="activities">
+        <h2>Activités disponibles</h2>
+        <form id="activities-form">
+            <table class="activities-table" id="activities-table">
+                <thead>
+                    <tr>
+                        <th><button type="button" class="sort-button styled-header" data-sort="name">Nom</button></th>
+                        <th><button type="button" class="sort-button styled-header" data-sort="date">Date</button></th>
+                        <th><button type="button" class="sort-button styled-header" data-sort="difficulty">Niveau de Difficulté ⭐</button></th>
+                        <th>Horaires</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Randonnée en montagne</td>
+                        <td>2024-12-10</td>
+                        <td>⭐⭐⭐⭐</td>
+                        <td>
+                            <label><input type="checkbox" name="Randonnée en montagne" value="10h - 12h"> 10h - 12h</label><br>
+                            <label><input type="checkbox" name="Randonnée en montagne" value="14h - 16h"> 14h - 16h</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ski sur Gazon</td>
+                        <td>2024-12-15</td>
+                        <td>⭐⭐</td>
+                        <td>
+                            <label><input type="checkbox" name="Ski sur Gazon" value="09h - 11h"> 09h - 11h</label><br>
+                            <label><input type="checkbox" name="Ski sur Gazon" value="13h - 15h"> 13h - 15h</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Escape Game</td>
+                        <td>2024-12-20</td>
+                        <td>⭐⭐⭐</td>
+                        <td>
+                            <label><input type="checkbox" name="Escape Game" value="10h30 - 11h30"> 10h30 - 11h30</label><br>
+                            <label><input type="checkbox" name="Escape Game" value="14h - 15h"> 14h - 15h</label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </br></br>
+            <button type="button" class="BoutonInscrire" id="register-button">S'inscrire</button>
+            </br></br></br>
+        </form>
+
+        <div id="info-box" class="info-box">
+            <h3>Informations transmises :</h3>
+            <pre id="info-content">Aucune sélection pour le moment.</pre>
+        </div>
+    </section>
+</section>
+
+{#-------------------------- SCRIPT -------------------------- #}
+
+{# Mise à jour de la boîte d'informations #}
+<script>
+document.getElementById('register-button').addEventListener('click', function () {
+    const activities = [];
+    
+    // Parcours de toutes les lignes du tableau pour récupérer les horaires sélectionnés
+    const rows = document.querySelectorAll('#activities-table tbody tr');
+    
+    rows.forEach(function(row) {
+        const activityName = row.cells[0].textContent.trim(); // Nom de l'activité
+        const timeCheckboxes = row.querySelectorAll(`input[name="${activityName}"]:checked`); // Horaires sélectionnés
+        const activityTimes = [];
+        
+        timeCheckboxes.forEach(function(timeCheckbox) {
+            activityTimes.push(timeCheckbox.value);
+        });
+
+        // Si des horaires sont sélectionnés pour cette activité
+        if (activityTimes.length > 0) {
+            activities.push({
+                name: activityName,
+                times: activityTimes
+            });
+        }
+    });
+
+    // Mise à jour de la boîte d'informations
+    const infoContent = document.getElementById('info-content');
+    if (activities.length > 0) {
+        let infoText = '';
+        activities.forEach(function (activity) {
+            infoText += `${activity.name}: ${activity.times.join(', ')}\n`;
+        });
+        infoContent.textContent = infoText;
+    } else {
+        infoContent.textContent = 'Aucune sélection pour le moment.';
+    }
+});
+
+// Tri du tableau
+document.querySelectorAll('.sort-button').forEach(button => {
+    button.addEventListener('click', function () {
+        const table = document.getElementById('activities-table');
+        const rows = Array.from(table.querySelectorAll('tbody tr'));
+        const sortType = this.dataset.sort;
+
+        rows.sort((a, b) => {
+            let valA, valB;
+
+            if (sortType === 'name') {
+                valA = a.cells[0].textContent.trim().toLowerCase();
+                valB = b.cells[0].textContent.trim().toLowerCase();
+                return valA.localeCompare(valB);
+            } else if (sortType === 'date') {
+                valA = new Date(a.cells[1].textContent.trim());
+                valB = new Date(b.cells[1].textContent.trim());
+                return valB - valA; // Tri par date descendante
+            } else if (sortType === 'difficulty') {
+                valA = a.cells[2].textContent.trim().length; // Compte les étoiles
+                valB = b.cells[2].textContent.trim().length;
+                return valB - valA; // Tri par difficulté descendante
+            }
+        });
+
+        // Réorganiser les lignes dans le tableau
+        const tbody = table.querySelector('tbody');
+        tbody.innerHTML = '';
+        rows.forEach(row => tbody.appendChild(row));
+    });
+});
+
+
+</script>
+

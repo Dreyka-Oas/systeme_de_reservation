@@ -1,0 +1,20 @@
+<!-- templates/partials/navbar.html.twig -->
+<nav class="navbar">
+    <div class="nav-left">
+        <a href="{{ path('app_home') }}" class="nav-logo">Sport'n go</a>
+        <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    </div>
+    <div class="nav-right">
+        {% if app.user %}
+            <span class="user-info">Bonjour, {{ app.user.name }}</span>
+            {% if is_granted('ROLE_MEMBER') %}
+                <!-- Bouton settings avec icône engrenage -->
+                <a href="{{ path('app_settings') }}" class="btn btn-settings"></a>
+            {% endif %}
+            <a href="{{ path('app_logout') }}" class="btn btn-logout">Déconnexion</a>
+        {% else %} 
+            <a href="{{ path('app_login') }}" class="btn btn-login">Se connecter</a>
+            <a href="{{ path('app_register') }}" class="btn btn-register">Créer un compte</a>
+        {% endif %}
+    </div>
+</nav>

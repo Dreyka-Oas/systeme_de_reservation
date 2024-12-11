@@ -1,0 +1,173 @@
+/* styles.css */
+
+/* Général - Réinitialisation de marges et paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Fond sombre et centrage du formulaire */
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0a192f; /* Couleur de fond sombre */
+    overflow: hidden;
+    position: relative;
+}
+
+/* Animation de fond */
+.background-animation {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(64, 169, 255, 0.1); /* Couleur du cercle bleu pâle */
+    animation: float 8s infinite ease-in-out;
+}
+
+.circle:nth-child(1) {
+    width: 300px;
+    height: 300px;
+    left: -150px;
+    top: -150px;
+}
+
+.circle:nth-child(2) {
+    width: 200px;
+    height: 200px;
+    right: -100px;
+    bottom: -100px;
+    animation-delay: 2s;
+}
+
+.circle:nth-child(3) {
+    width: 150px;
+    height: 150px;
+    right: 20%;
+    top: 20%;
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(50px, 50px) rotate(90deg);
+    }
+    50% {
+        transform: translate(0, 100px) rotate(180deg);
+    }
+    75% {
+        transform: translate(-50px, 50px) rotate(270deg);
+    }
+}
+
+/* Formulaire de connexion */
+.login-form {
+    width: 100%;
+    max-width: 400px;
+    z-index: 1;
+    position: relative;
+    animation: fadeIn 0.6s ease-out;
+    padding: 2rem;
+    /*background-color: rgba(30, 41, 59, 0.9); /* Fond foncé semi-transparent */
+    border-radius: 12px;
+    /*box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.6);*/
+}
+
+/* Animation fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Titre principal */
+h1 {
+    color: #fff;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+/* Groupes de champs de saisie */
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    color: #94a3b8; /* Couleur du texte des labels */
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #66666627; /* Couleur des bordures */
+    background: rgba(30, 41, 59, 0.7); /* Fond transparent foncé pour les champs */
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #3b82f6; /* Bordure bleue au focus */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); /* Ombre autour du champ */
+}
+
+/* Bouton de connexion */
+button {
+    width: 100%;
+    padding: 0.75rem;
+    background: #3b82f6; /* Bleu clair pour le bouton */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #2563eb; /* Bleu plus foncé au survol */
+    transform: translateY(-2px);
+}
+
+/* Lien pour l'inscription */
+.register-link {
+    display: block;
+    text-align: center;
+    color: #94a3b8; /* Couleur du texte du lien */
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    transition: color 0.3s ease;
+    position: relative; /* Ajout de positionnement relatif pour que z-index fonctionne */
+}
+
+.register-link:hover {
+    color: #3b82f6; /* Bleu clair au survol */
+}
+
+
+
