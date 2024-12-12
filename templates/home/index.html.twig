@@ -4,7 +4,7 @@
 
 {% block body %}
     <!-- Lien vers le fichier CSS -->
-    <link href="{{ asset('css/home.css') }}" rel="stylesheet">
+    <link href="{{ asset('styles/home.css') }}" rel="stylesheet">
 
     <header>
         <!-- Inclure la barre de navigation -->
@@ -20,6 +20,11 @@
         </br>
          {% if is_granted('ROLE_MEMBER') %}
             {% include 'home/member_home.html.twig' %}
+          
+        {% endif %}
+
+        {% if is_granted('ROLE_ADMIN') %}
+            {% include 'home/admin_home.html.twig' %}
         {% endif %}
     </main>
 {% endblock %}

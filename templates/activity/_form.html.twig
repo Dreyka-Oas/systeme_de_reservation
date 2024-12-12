@@ -1,4 +1,20 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Activité{% endblock %}
+
+{% block body %}
+
+    <!-- Contenu principal -->
+    <main>
+    {{ form_start(form) }}
+        {{ form_row(form.label, {
+            'attr': {'placeholder': "Entrez le nom de l'activité"}
+        }) }}
+        {{ form_row(form.description, {
+            'attr': {'placeholder': 'Entrez une description...', 'rows': 5}
+        }) }}
+        <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+    {{ form_end(form) }}
+    </main>
+
+{% endblock %}
