@@ -2,12 +2,12 @@
 <nav class="navbar">
     <div class="nav-left">
         <a href="{{ path('app_home') }}" class="nav-logo">Sport'n go</a>
-        <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+        {# <link rel="stylesheet" href="{{ assets('styles/home.css') }}"> #}
     </div>
     <div class="nav-right">
         {% if app.user %}
             <span class="user-info">Bonjour, {{ app.user.name }}</span>
-            {% if is_granted('ROLE_MEMBER') %}
+            {% if is_granted('ROLE_ADMIN') %}
                 <!-- Bouton settings avec icône engrenage -->
                 <a href="{{ path('app_settings') }}" class="btn btn-settings"></a>
             {% endif %}

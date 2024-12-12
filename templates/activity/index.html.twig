@@ -3,6 +3,9 @@
 {% block title %}Activity index{% endblock %}
 
 {% block body %}
+    <!-- Inclure la barre de navigation -->
+    {% include 'home/navbar.html.twig' %}
+
     <h1>Activity index</h1>
 
     <table class="table">
@@ -10,6 +13,7 @@
             <tr>
                 <th>Id</th>
                 <th>Label</th>
+                <th>Description</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,6 +22,7 @@
             <tr>
                 <td>{{ activity.id }}</td>
                 <td>{{ activity.label }}</td>
+                <td>{{ activity.description }}</td>
                 <td>
                     <a href="{{ path('app_activity_show', {'id': activity.id}) }}">show</a>
                     <a href="{{ path('app_activity_edit', {'id': activity.id}) }}">edit</a>

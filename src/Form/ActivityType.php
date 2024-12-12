@@ -12,8 +12,13 @@ class ActivityType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('label')
-        ;
+            ->add('label', null, [
+                'label' => 'Titre',
+            ])
+            ->add('description', null, [
+                'label' => 'Description',
+                'required' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

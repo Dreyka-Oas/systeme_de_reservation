@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Activités{% endblock %}
+
+{% block body %}
+    <section class="admin-activity-management">
+        <h2>Gestion des Activités</h2>
+        <a id="open-popup" href="{{ path('app_activity_new') }}" class="btn btn-primary">Ajouter une nouvelle activité</a>
+
+        <!-- Fenêtre popup -->
+        <div id="activity-popup" class="popup hidden">
+            <div class="popup-content">
+                <button id="close-popup" class="close-popup">&times;</button>
+                <h3>Créer une nouvelle activité</h3>
+
+                {% if form is defined %}
+                    {% include 'activity/index.html.twig' with { 'form': form } %}
+                {% else %}
+                    <p>Le formulaire n'est pas disponible.</p>
+                {% endif %}
+            </div>
+        </div>
+
+      
+
+        <!-- Script pour la gestion de la popup -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const openPopupButton = document.getElementById('open-popup');
+                const closePopupButton = document.getElementById('close-popup');
+                const popup = document.getElementById('activity-popup');
+
+                openPopupButton.addEventListener('click', () => {
+                    popup.classList.remove('hidden');
+                });
+
+                closePopupButton.addEventListener('click', () => {
+                    popup.classList.add('hidden');
+                });
+
+                window.addEventListener('click', (event) => {
+                    if (event.target === popup) {
+                        popup.classList.add('hidden');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.sort-button').forEach(button => {
+                button.addEventListener('click', function () {
+                    const table = document.getElementById('activities-table');
+                    const rows = Array.from(table.querySelectorAll('tbody tr'));
+                    const sortType = this.dataset.sort;
+
+                    rows.sort((a, b) => {
+                        let valA, valB;
+
+                        if (sortType === 'name') {
+                            valA = a.cells[0].textContent.trim().toLowerCase();
+                            valB = b.cells[0].textContent.trim().toLowerCase();
+                            return valA.localeCompare(valB);
+                        } else if (sortType === 'date') {
+                            valA = new Date(a.cells[1].textContent.trim());
+                            valB = new Date(b.cells[1].textContent.trim());
+                            return valB - valA; // Tri par date descendante
+                        } else if (sortType === 'difficulty') {
+                            valA = a.cells[2].textContent.trim().length; // Compte les étoiles
+                            valB = b.cells[2].textContent.trim().length;
+                            return valB - valA; // Tri par difficulté descendante
+                        }
+                    });
+
+                    // Réorganiser les lignes dans le tableau
+                    const tbody = table.querySelector('tbody');
+                    tbody.innerHTML = '';
+                    rows.forEach(row => tbody.appendChild(row));
+                });
+            });
+        </script>
+    </section>
+{% endblock %}
