@@ -15,62 +15,6 @@ body {
     color: #fff;
 }
 
-/* Barre de navigation */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(30, 41, 59, 0.9); /* Fond semi-transparent */
-    padding: 1rem 2rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-}
-
-.nav-logo {
-    font-size: 1.5rem;
-    color: #3b82f6; /* Couleur du logo */
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.nav-right .btn {
-    padding: 0.5rem 1rem;
-    margin-left: 1rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    text-decoration: none;
-    color: #fff;
-    transition: background 0.3s ease;
-}
-
-.nav-right .btn-login {
-    background: #3b82f6;
-}
-
-.nav-right .btn-login:hover {
-    background: #2563eb;
-}
-
-.nav-right .btn-register {
-    background: #1e293b;
-    border: 1px solid #3b82f6;
-}
-
-.nav-right .btn-register:hover {
-    background: #3b82f6;
-}
-
-.nav-right .btn-logout {
-    background: #ef4444; /* Rouge pour déconnexion */
-}
-
-.nav-right .btn-logout:hover {
-    background: #dc2626;
-}
-
 /* Contenu principal */
 main {
     flex: 1;

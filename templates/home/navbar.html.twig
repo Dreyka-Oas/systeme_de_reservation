@@ -1,20 +1,25 @@
-<!-- templates/partials/navbar.html.twig -->
-<nav class="navbar">
-    <div class="nav-left">
-        <a href="{{ path('app_home') }}" class="nav-logo">Sport'n go</a>
-        {# <link rel="stylesheet" href="{{ assets('styles/home.css') }}"> #}
-    </div>
-    <div class="nav-right">
-        {% if app.user %}
-            <span class="user-info">Bonjour, {{ app.user.name }}</span>
-            {% if is_granted('ROLE_ADMIN') %}
-                <!-- Bouton settings avec icône engrenage -->
-                <a href="{{ path('app_settings') }}" class="btn btn-settings"></a>
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/nav_bar.css') }}">
+{% endblock %}
+
+{% block body %}
+    <nav class="navbar-container">
+        <div class="navbar-left">
+            <a href="{{ path('app_home') }}" class="navbar-logo">Sport'n go</a>
+        </div>
+        <div class="navbar-right">
+            {% if app.user %}
+                <span class="user-info">Bonjour, {{ app.user.name }}</span>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_settings') }}" class="navbar-btn navbar-btn-settings"></a>
+                {% endif %}
+                <a href="{{ path('app_logout') }}" class="navbar-btn navbar-btn-logout">Déconnexion</a>
+            {% else %}
+                <a href="{{ path('app_login') }}" class="navbar-btn navbar-btn-login">Se connecter</a>
+                <a href="{{ path('app_register') }}" class="navbar-btn navbar-btn-register">Créer un compte</a>
             {% endif %}
-            <a href="{{ path('app_logout') }}" class="btn btn-logout">Déconnexion</a>
-        {% else %} 
-            <a href="{{ path('app_login') }}" class="btn btn-login">Se connecter</a>
-            <a href="{{ path('app_register') }}" class="btn btn-register">Créer un compte</a>
-        {% endif %}
-    </div>
-</nav>
+        </div>
+    </nav>
+{% endblock %}

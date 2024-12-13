@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Edit Activity{% endblock %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/activity.css') }}">
+    
+{% endblock %}
 {% block body %}
     <!-- Inclure la barre de navigation -->
     {% include 'home/navbar.html.twig' %}

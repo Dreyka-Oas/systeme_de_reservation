@@ -40,4 +40,29 @@ class ActivityRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    /* Récupère toutes les activités avec leurs sessions et niveaux.*/
+    
+    public function findAllActivitiesWithSessionsAndLevels(): array
+    {
+
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+            SELECT a.label AS activity_name, 
+                   s.date AS session_date, 
+                   s.heure AS session_time, 
+                   s.duration AS session_duration, 
+                   l.label AS level_label
+            FROM activity a
+            JOIN session s ON a.id = s.activity_id
+            JOIN level l ON a.level_id = l.id
+            ORDER BY s.date, a.label;
+        ';
+
+       
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAllAssociative();
+    }
 }

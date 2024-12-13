@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Nouvelle Activité{% endblock %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/activity.css') }}">
+    
+{% endblock %}
 {% block body %}
 
     <!-- Contenu principal -->
