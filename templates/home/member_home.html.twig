@@ -16,33 +16,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Randonnée en montagne</td>
-                        <td>2024-12-10</td>
-                        <td>⭐⭐⭐⭐</td>
-                        <td>
-                            <label><input type="checkbox" name="Randonnée en montagne" value="10h - 12h"> 10h - 12h</label><br>
-                            <label><input type="checkbox" name="Randonnée en montagne" value="14h - 16h"> 14h - 16h</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Ski sur Gazon</td>
-                        <td>2024-12-15</td>
-                        <td>⭐⭐</td>
-                        <td>
-                            <label><input type="checkbox" name="Ski sur Gazon" value="09h - 11h"> 09h - 11h</label><br>
-                            <label><input type="checkbox" name="Ski sur Gazon" value="13h - 15h"> 13h - 15h</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Escape Game</td>
-                        <td>2024-12-20</td>
-                        <td>⭐⭐⭐</td>
-                        <td>
-                            <label><input type="checkbox" name="Escape Game" value="10h30 - 11h30"> 10h30 - 11h30</label><br>
-                            <label><input type="checkbox" name="Escape Game" value="14h - 15h"> 14h - 15h</label>
-                        </td>
-                    </tr>
+                    {% for activity in activities %}
+                        <tr>
+                            <td>{{ activity.activity_name }}</td>
+                            <td>{{ activity.session_date|date('d-m-Y') }}</td>
+                            <td>{{ activity.session_time }}</td>
+                            <td>{{ activity.session_duration }}</td>
+                            <td>{{ activity.level_label }}</td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
             </br></br>

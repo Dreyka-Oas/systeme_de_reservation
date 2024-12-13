@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+
 #[Route('/activity')]
 final class ActivityController extends AbstractController
 {
@@ -77,5 +78,16 @@ final class ActivityController extends AbstractController
         }
 
         return $this->redirectToRoute('app_activity_index', [], Response::HTTP_SEE_OTHER);
+    }
+    
+    public function memberhome(ActivityRepository $activityRepository): Response
+    {
+        // Appelle la méthode personnalisée pour récupérer les activités avec leurs sessions et niveaux
+        $activities = $activityRepository->findAllActivitiesWithSessionsAndLevels();
+
+        // Retourne une vue avec les données récupérées
+        return $this->render('home/member_home.html.twig', [
+            'activities' => $activities,
+        ]);
     }
 }

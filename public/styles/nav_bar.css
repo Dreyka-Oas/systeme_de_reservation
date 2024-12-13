@@ -1,0 +1,187 @@
+/* Navigation principale flottante */
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(30, 41, 59, 0.95);
+    padding: 1.2rem 2.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1),
+                0 4px 8px rgba(0, 0, 0, 0.08);
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 25px;
+    width: 95%;
+    max-width: 95%;
+    margin: 0 auto;
+    transition: background 0.3s ease;
+}
+
+.navbar-container:hover {
+    background: rgba(30, 41, 59, 1);
+}
+
+/* Logo styling */
+.navbar-logo {
+    font-size: 1.8rem;
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: color 0.3s ease;
+}
+
+.navbar-logo:hover {
+    color: #60a5fa;
+}
+
+/* Container droit */
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Style de base pour tous les boutons */
+.navbar-btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    transition: background 0.3s ease, transform 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Message de bienvenue */
+.user-info {
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    margin-right: 1rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+}
+
+/* Bouton de connexion */
+.navbar-btn-login {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border: none;
+}
+
+.navbar-btn-login:hover {
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+}
+
+/* Bouton d'inscription */
+.navbar-btn-register {
+    background: rgba(59, 130, 246, 0.1);
+    border: 2px solid #3b82f6;
+}
+
+.navbar-btn-register:hover {
+    background: #3b82f6;
+}
+
+/* Bouton de déconnexion */
+.navbar-btn-logout {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    border: none;
+}
+
+.navbar-btn-logout:hover {
+    background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+}
+
+/* Bouton paramètres */
+.navbar-btn-settings {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.navbar-btn-settings::before {
+    content: '';
+    width: 24px;
+    height: 24px;
+    background-image: url('https://cdn-icons-png.flaticon.com/512/416/416204.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.9;
+}
+
+.navbar-btn-settings:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Effets de clic */
+.navbar-btn:active {
+    transform: translateY(1px);
+}
+
+/* Ajout d'un padding en haut du body pour compenser la navbar fixe */
+body {
+    padding-top: calc(1rem + 80px);
+}
+
+/* Media Queries pour la responsivité */
+@media (max-width: 768px) {
+    .navbar-container {
+        padding: 1rem 1.5rem;
+        top: 0.5rem;
+        border-radius: 20px;
+    }
+    
+    .navbar-right {
+        gap: 1rem;
+    }
+    
+    .navbar-btn {
+        padding: 0.6rem 1rem;
+    }
+    
+    .user-info {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-container {
+        padding: 0.8rem 1rem;
+        border-radius: 15px;
+    }
+
+    .navbar-logo {
+        font-size: 1.6rem;
+    }
+    
+    .navbar-btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .navbar-right {
+        gap: 0.5rem;
+    }
+}

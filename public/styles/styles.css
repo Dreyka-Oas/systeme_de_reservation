@@ -1,25 +1,42 @@
-/* styles.css */
-
-/* Général - Réinitialisation de marges et paddings */
+/* Général - Réinitialisation et fonts */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-/* Fond sombre et centrage du formulaire */
+/* Style du body avec gradient animé */
 body {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #0a192f; /* Couleur de fond sombre */
+    background: linear-gradient(
+        45deg,
+        #0a192f,
+        #0f2942,
+        #1a365d
+    );
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
     overflow: hidden;
     position: relative;
 }
 
-/* Animation de fond */
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Cercles d'animation de fond */
 .background-animation {
     position: absolute;
     width: 100%;
@@ -30,45 +47,65 @@ body {
 .circle {
     position: absolute;
     border-radius: 50%;
-    background: rgba(64, 169, 255, 0.1); /* Couleur du cercle bleu pâle */
-    animation: float 8s infinite ease-in-out;
+    background: linear-gradient(
+        45deg,
+        rgba(59, 130, 246, 0.1),
+        rgba(37, 99, 235, 0.1)
+    );
+    backdrop-filter: blur(5px);
+    animation: float 15s infinite ease-in-out;
 }
 
 .circle:nth-child(1) {
-    width: 300px;
-    height: 300px;
-    left: -150px;
-    top: -150px;
+    width: 400px;
+    height: 400px;
+    left: -200px;
+    top: -200px;
+    background: linear-gradient(
+        45deg,
+        rgba(59, 130, 246, 0.1),
+        rgba(147, 51, 234, 0.1)
+    );
 }
 
 .circle:nth-child(2) {
-    width: 200px;
-    height: 200px;
-    right: -100px;
-    bottom: -100px;
-    animation-delay: 2s;
+    width: 300px;
+    height: 300px;
+    right: -150px;
+    bottom: -150px;
+    animation-delay: 3s;
+    background: linear-gradient(
+        45deg,
+        rgba(59, 130, 246, 0.1),
+        rgba(236, 72, 153, 0.1)
+    );
 }
 
 .circle:nth-child(3) {
-    width: 150px;
-    height: 150px;
-    right: 20%;
-    top: 20%;
-    animation-delay: 4s;
+    width: 200px;
+    height: 200px;
+    right: 25%;
+    top: 25%;
+    animation-delay: 6s;
+    background: linear-gradient(
+        45deg,
+        rgba(16, 185, 129, 0.1),
+        rgba(59, 130, 246, 0.1)
+    );
 }
 
 @keyframes float {
     0%, 100% {
-        transform: translate(0, 0) rotate(0deg);
+        transform: translate(0, 0) rotate(0deg) scale(1);
     }
     25% {
-        transform: translate(50px, 50px) rotate(90deg);
+        transform: translate(50px, 50px) rotate(90deg) scale(1.1);
     }
     50% {
-        transform: translate(0, 100px) rotate(180deg);
+        transform: translate(0, 100px) rotate(180deg) scale(1);
     }
     75% {
-        transform: translate(-50px, 50px) rotate(270deg);
+        transform: translate(-50px, 50px) rotate(270deg) scale(0.9);
     }
 }
 
@@ -78,96 +115,139 @@ body {
     max-width: 400px;
     z-index: 1;
     position: relative;
-    animation: fadeIn 0.6s ease-out;
-    padding: 2rem;
-    /*background-color: rgba(30, 41, 59, 0.9); /* Fond foncé semi-transparent */
-    border-radius: 12px;
-    /*box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.6);*/
+    animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 2.5rem;
+    background: rgba(30, 41, 59, 0.7);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
-/* Animation fade-in */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px) scale(0.9);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
 
 /* Titre principal */
 h1 {
     color: #fff;
-    margin-bottom: 2rem;
-    font-size: 1.8rem;
+    margin-bottom: 2.5rem;
+    font-size: 2rem;
     text-align: center;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Groupes de champs de saisie */
 .input-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
+    position: relative;
 }
 
 label {
     display: block;
-    color: #94a3b8; /* Couleur du texte des labels */
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
+    color: #e2e8f0;
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transform-origin: left;
+    transition: transform 0.3s ease;
 }
 
 input {
     width: 100%;
-    padding: 0.75rem;
-    border: 2px solid #66666627; /* Couleur des bordures */
-    background: rgba(30, 41, 59, 0.7); /* Fond transparent foncé pour les champs */
-    border-radius: 8px;
+    padding: 1rem;
+    background: rgba(15, 23, 42, 0.3);
+    border: 2px solid rgba(148, 163, 184, 0.1);
+    border-radius: 12px;
     color: #fff;
     font-size: 1rem;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input:hover {
+    border-color: rgba(59, 130, 246, 0.4);
 }
 
 input:focus {
     outline: none;
-    border-color: #3b82f6; /* Bordure bleue au focus */
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); /* Ombre autour du champ */
+    border-color: #3b82f6;
+    background: rgba(15, 23, 42, 0.4);
+    box-shadow: 
+        0 0 0 4px rgba(59, 130, 246, 0.1),
+        0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 /* Bouton de connexion */
 button {
     width: 100%;
-    padding: 0.75rem;
-    background: #3b82f6; /* Bleu clair pour le bouton */
+    padding: 1rem;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
     color: #fff;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 4px 6px -1px rgba(59, 130, 246, 0.2),
+        0 2px 4px -1px rgba(59, 130, 246, 0.1);
 }
 
 button:hover {
-    background: #2563eb; /* Bleu plus foncé au survol */
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
     transform: translateY(-2px);
+    box-shadow: 
+        0 8px 12px -3px rgba(59, 130, 246, 0.3),
+        0 4px 6px -2px rgba(59, 130, 246, 0.2);
 }
 
-/* Lien pour l'inscription */
+button:active {
+    transform: translateY(1px);
+}
+
+/* Lien d'inscription */
 .register-link {
     display: block;
     text-align: center;
-    color: #94a3b8; /* Couleur du texte du lien */
+    color: #e2e8f0;
     text-decoration: none;
-    font-size: 0.9rem;
-    margin-top: 1rem;
-    transition: color 0.3s ease;
-    position: relative; /* Ajout de positionnement relatif pour que z-index fonctionne */
+    font-size: 0.95rem;
+    margin-top: 1.5rem;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+    border-radius: 8px;
 }
 
 .register-link:hover {
-    color: #3b82f6; /* Bleu clair au survol */
+    color: #3b82f6;
+    background: rgba(59, 130, 246, 0.1);
+    transform: translateY(-1px);
 }
 
+/* Responsive design */
+@media (max-width: 480px) {
+    .login-form {
+        margin: 1rem;
+        padding: 2rem;
+    }
 
+    h1 {
+        font-size: 1.75rem;
+    }
 
+    button {
+        padding: 0.875rem;
+    }
+}

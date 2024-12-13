@@ -2,9 +2,17 @@
 
 {% block title %}Activity index{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/activity.css') }}">
+    
+{% endblock %}
+
 {% block body %}
     <!-- Inclure la barre de navigation -->
     {% include 'home/navbar.html.twig' %}
+     
+ 
 
     <h1>Activity index</h1>
 
@@ -14,7 +22,7 @@
                 <th>Id</th>
                 <th>Label</th>
                 <th>Description</th>
-                <th>actions</th>
+                <th>actions</th> 
             </tr>
         </thead>
         <tbody>

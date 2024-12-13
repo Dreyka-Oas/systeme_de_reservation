@@ -2,13 +2,23 @@
 
 {% block title %}New Activity{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/activity.css') }}">
+    
+{% endblock %}
+
 {% block body %}
     <!-- Inclure la barre de navigation -->
     {% include 'home/navbar.html.twig' %}
 
-    <h1>Create new Activity</h1>
+    <main class="main-content">
+        <h1>Create New Activity</h1>
 
-    {{ include('activity/_form.html.twig') }}
+        <div class="form-container">
+            {{ include('activity/_form.html.twig') }}
+        </div>
 
-    <a href="{{ path('app_activity_index') }}">back to list</a>
+        <a href="{{ path('app_activity_index') }}" class="btn-back">Back to List</a>
+    </main>
 {% endblock %}

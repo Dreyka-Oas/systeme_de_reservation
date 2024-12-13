@@ -8,6 +8,10 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+use App\Repository\ActivityRepository;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 final class ActivityControllerTest extends WebTestCase
 {
     private KernelBrowser $client;
@@ -110,4 +114,5 @@ final class ActivityControllerTest extends WebTestCase
         self::assertResponseRedirects('/activity/');
         self::assertSame(0, $this->repository->count([]));
     }
+
 }
