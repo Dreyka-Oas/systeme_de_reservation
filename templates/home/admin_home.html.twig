@@ -1,17 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Gestion des Activités{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/activity.css') }}">
+{% endblock %}
 
 {% block body %}
     <section class="admin-activity-management">
-        <h2>Gestion des Activités</h2>
+        <h1>Gestion des Activités</h1>
         <a id="open-popup" href="{{ path('app_activity_new') }}" class="btn btn-primary">Ajouter une nouvelle activité</a>
 
         <!-- Fenêtre popup -->
         <div id="activity-popup" class="popup hidden">
             <div class="popup-content">
                 <button id="close-popup" class="close-popup">&times;</button>
-                <h3>Créer une nouvelle activité</h3>
+                <h2>Créer une nouvelle activité</h2>
 
                 {% if form is defined %}
                     {% include 'activity/index.html.twig' with { 'form': form } %}
@@ -20,8 +24,6 @@
                 {% endif %}
             </div>
         </div>
-
-      
 
         <!-- Script pour la gestion de la popup -->
         <script>

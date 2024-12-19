@@ -80,12 +80,14 @@ final class ActivityController extends AbstractController
         return $this->redirectToRoute('app_activity_index', [], Response::HTTP_SEE_OTHER);
     }
     
+    
+    #[Route('/member/home', name:'member_home')]
     public function memberhome(ActivityRepository $activityRepository): Response
     {
-        // Appelle la méthode personnalisée pour récupérer les activités avec leurs sessions et niveaux
         $activities = $activityRepository->findAllActivitiesWithSessionsAndLevels();
 
-        // Retourne une vue avec les données récupérées
+        // dump($activities);
+
         return $this->render('home/member_home.html.twig', [
             'activities' => $activities,
         ]);

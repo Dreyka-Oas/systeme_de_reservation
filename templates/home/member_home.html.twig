@@ -3,9 +3,10 @@
     <p>Voici les activités disponibles pour vous :</p>
     </br></br>
 
+
     <section class="activities">
-        <h2>Activités disponibles</h2>
-        <form id="activities-form">
+        {# {% if activities is defined %} #}
+            <h2>Activités disponibles</h2>
             <table class="activities-table" id="activities-table">
                 <thead>
                     <tr>
@@ -20,40 +21,38 @@
                         <tr>
                             <td>{{ activity.activity_name }}</td>
                             <td>{{ activity.session_date|date('d-m-Y') }}</td>
-                            <td>{{ activity.session_time }}</td>
-                            <td>{{ activity.session_duration }}</td>
                             <td>{{ activity.level_label }}</td>
+                            <td>{{ activity.session_time }} - {{ activity.session_duration }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            </br></br>
-            <button type="button" class="BoutonInscrire" id="register-button">S'inscrire</button>
-            </br></br></br>
-        </form>
-
-        <div id="info-box" class="info-box">
-            <h3>Informations transmises :</h3>
-            <pre id="info-content">Aucune sélection pour le moment.</pre>
-        </div>
+        {# {% else %}
+            <p>Aucune activité disponible pour le moment.</p>
+        {% endif %} #}
+        </br></br>
+        <button type="button" class="BoutonInscrire" id="register-button">S'inscrire</button>
+        </br></br></br>
     </section>
 </section>
 
-{#-------------------------- SCRIPT -------------------------- #}
+<div id="info-box" class="info-box">
+    <h3>Informations transmises :</h3>
+    <pre id="info-content">Aucune sélection pour le moment.</pre>
+</div>
 
-{# Mise à jour de la boîte d'informations #}
 <script>
 document.getElementById('register-button').addEventListener('click', function () {
     const activities = [];
-    
+
     // Parcours de toutes les lignes du tableau pour récupérer les horaires sélectionnés
     const rows = document.querySelectorAll('#activities-table tbody tr');
-    
+
     rows.forEach(function(row) {
         const activityName = row.cells[0].textContent.trim(); // Nom de l'activité
         const timeCheckboxes = row.querySelectorAll(`input[name="${activityName}"]:checked`); // Horaires sélectionnés
         const activityTimes = [];
-        
+
         timeCheckboxes.forEach(function(timeCheckbox) {
             activityTimes.push(timeCheckbox.value);
         });
@@ -111,7 +110,4 @@ document.querySelectorAll('.sort-button').forEach(button => {
         rows.forEach(row => tbody.appendChild(row));
     });
 });
-
-
 </script>
-

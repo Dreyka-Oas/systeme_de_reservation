@@ -23,16 +23,15 @@ class Session
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $duration = null;
 
+    #[ORM\ManyToOne(targetEntity: Activity::class, inversedBy: 'sessions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Activity $activity = null;
+
+    // Getters and setters...
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setId(int $id): static
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     public function getDate(): ?\DateTimeInterface
@@ -43,7 +42,6 @@ class Session
     public function setDate(\DateTimeInterface $date): static
     {
         $this->date = $date;
-
         return $this;
     }
 
@@ -55,7 +53,6 @@ class Session
     public function setHeure(\DateTimeInterface $heure): static
     {
         $this->heure = $heure;
-
         return $this;
     }
 
@@ -67,7 +64,17 @@ class Session
     public function setDuration(\DateTimeInterface $duration): static
     {
         $this->duration = $duration;
+        return $this;
+    }
 
+    public function getActivity(): ?Activity
+    {
+        return $this->activity;
+    }
+
+    public function setActivity(?Activity $activity): static
+    {
+        $this->activity = $activity;
         return $this;
     }
 }
