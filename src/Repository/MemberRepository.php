@@ -1,4 +1,5 @@
 <?php
+// src/Repository/MemberRepository.php
 
 namespace App\Repository;
 
@@ -16,28 +17,36 @@ class MemberRepository extends ServiceEntityRepository
         parent::__construct($registry, Member::class);
     }
 
-    //    /**
-    //     * @return Member[] Returns an array of Member objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('m.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    /* Récupère toutes les activités avec leurs sessions et niveaux pour un membre spécifique. */
+    public function findAllActivitiesWithSessionsAndLevelsForMember(Member $member): array
+    {
+        $qb = $this->createQueryBuilder('m')
+            ->join('m.activities', 'a')
+            ->join('a.sessions', 's')
+            ->join('a.level', 'l')
+            ->where('m.id = :memberId')
+            ->setParameter('memberId', $member->getId())
+            ->select(
+                'a.id AS id',
+                'a.label AS activity_name',
+                's.date AS session_date',
+                's.heure AS session_time',
+                's.duration AS session_duration',
+                'l.label AS level_label'
+            )
+            ->orderBy('s.date', 'ASC')
+            ->addOrderBy('a.label', 'ASC');
 
-    //    public function findOneBySomeField($value): ?Member
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        $query = $qb->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function findAllActivities(): array
+    {
+        return $this->createQueryBuilder('a')
+            ->select('a')
+            ->getQuery()
+            ->getResult();
+    }
 }

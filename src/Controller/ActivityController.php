@@ -81,15 +81,5 @@ final class ActivityController extends AbstractController
     }
     
     
-    #[Route('/member/home', name:'member_home')]
-    public function memberhome(ActivityRepository $activityRepository): Response
-    {
-        $activities = $activityRepository->findAllActivitiesWithSessionsAndLevels();
 
-        // dump($activities);
-
-        return $this->render('home/member_home.html.twig', [
-            'activities' => $activities,
-        ]);
-    }
 }

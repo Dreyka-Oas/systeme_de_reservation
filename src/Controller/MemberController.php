@@ -1,15 +1,17 @@
 <?php
+// src/Controller/MemberController.php
 
 namespace App\Controller;
 
 use App\Entity\Member;
 use App\Form\MemberType;
 use App\Repository\MemberRepository;
+use App\Repository\ActivityRepository; // Importez le repository des activités
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/member')]
 final class MemberController extends AbstractController
@@ -71,11 +73,33 @@ final class MemberController extends AbstractController
     #[Route('/{id}', name: 'app_member_delete', methods: ['POST'])]
     public function delete(Request $request, Member $member, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$member->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$member->getId(), $request->request->get('_token'))) {
             $entityManager->remove($member);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('app_member_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/home', name: 'app_member_home', methods: ['GET'])]
+    public function memberHome(EntityManagerInterface $entityManager): Response
+    {
+        // Requête SQL brute pour récupérer toutes les activités
+        $sql = 'SELECT * FROM activity';
+        $connection = $entityManager->getConnection();
+        $stmt = $connection->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+    
+        // Récupérer les activités sous forme de tableau associatif
+        $activities = $resultSet->fetchAllAssociative();
+    
+        // Vérification pour debug
+        dump($activities);
+    
+        return $this->render('home/member_home.html.twig', [
+            'activities' => $activities,
+        ]);
+    }
+    
 }
+

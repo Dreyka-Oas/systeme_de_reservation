@@ -19,7 +19,7 @@
         {% endif %}
         </br>
          {% if is_granted('ROLE_MEMBER') %}
-            {% include 'home/member_home.html.twig' %}
+            {% include 'home/member_home.html.twig' with {'activities': activities} %}
           
         {% endif %}
 

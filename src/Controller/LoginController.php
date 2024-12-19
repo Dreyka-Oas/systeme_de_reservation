@@ -20,7 +20,7 @@ class LoginController extends AbstractController
                 return $this->redirectToRoute('app_admin_index');
             } else if (in_array('ROLE_MEMBRE', $this->getUser()->getRoles())){
 
-                return $this->redirectToRoute('app_member_index'); 
+                return $this->redirectToRoute('app_member_home'); 
             }
         }
 
