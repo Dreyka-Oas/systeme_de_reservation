@@ -1,7 +1,7 @@
+{# templates/home/member_home.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {# Ajout de debug #}
 
 
     <section class="user-home">
@@ -16,6 +16,7 @@
                     <thead>
                         <tr>
                             <th><button type="button" class="sort-button styled-header" data-sort="name">Nom</button></th>
+                            <th><button type="button" class="sort-button styled-header" data-sort="date">Date</button></th>
                             <th><button type="button" class="sort-button styled-header" data-sort="difficulty">Niveau de Difficulté ⭐</button></th>
                             <th>Horaires</th>
                         </tr>
@@ -24,12 +25,13 @@
                         {% for activity in activities %}
                             <tr>
                                 <td>{{ activity.activity_name }}</td>
+                                <td>{{ activity.session_date|date('d-m-Y') }}</td>
                                 <td>{{ activity.level_label }}</td>
-                                {# <td>{{ activity.session_time }} - {{ activity.session_duration }}</td> #}
+                                <td>{{ activity.session_time|date('H:i') }} - {{ activity.session_duration|date('H:i') }}</td>
                             </tr>
                         {% else %}
                             <tr>
-                                <td colspan="3">Aucune activité disponible pour le moment.</td>
+                                <td colspan="4">Aucune activité disponible pour le moment.</td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -100,6 +102,10 @@
                     valA = a.cells[0].textContent.trim().toLowerCase();
                     valB = b.cells[0].textContent.trim().toLowerCase();
                     return valA.localeCompare(valB);
+                } else if (sortType === 'date') {
+                    valA = new Date(a.cells[1].textContent.trim());
+                    valB = new Date(b.cells[1].textContent.trim());
+                    return valB - valA; // Tri par date descendante
                 } else if (sortType === 'difficulty') {
                     valA = a.cells[2].textContent.trim().length; // Compte les étoiles
                     valB = b.cells[2].textContent.trim().length;

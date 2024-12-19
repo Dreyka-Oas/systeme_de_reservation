@@ -26,13 +26,31 @@ class ActivityRepository extends ServiceEntityRepository
             ->select(
                 'a.id AS id',
                 'a.label AS activity_name',
-                'l.label AS level_label'
+                'l.label AS level_label',
+                's.date AS session_date',
+                's.heure AS session_time',
+                's.duration AS session_duration'
             )
             ->orderBy('s.date', 'ASC')
             ->addOrderBy('a.label', 'ASC');
 
         $query = $qb->getQuery();
-        
+
         return $query->getResult();
     }
 }
+// SELECT
+//     a.id AS id,
+//     a.label AS activity_name,
+//     l.label AS level_label,
+//     s.date AS session_date,
+//     s.heure AS session_time,
+//     s.duration AS session_duration
+// FROM
+//     activity a
+// JOIN
+//     session s ON a.id = s.activity_id
+// JOIN
+//     level l ON a.level_id = l.id
+// ORDER BY
+//     s.date ASC, a.label ASC;
